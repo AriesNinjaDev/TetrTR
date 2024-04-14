@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta charset="utf-8" />
@@ -433,7 +434,7 @@
                                 ---
                             </div>
                         </div>
-                        <p>UNRANKED</p>
+                        <p class="labelx">UNRANKED</p>
                         <div class="rank-row bevel-rank-z">
                             <div class="rank">
                                 <img
@@ -456,6 +457,7 @@
 
         <script>
             document.addEventListener("DOMContentLoaded", function (event) {
+                document.body.style.display = "block";
                 var scrollpos = localStorage.getItem("scrollpos");
                 if (scrollpos) document.getElementById("contentbox").scrollTo(0, scrollpos);
             });
