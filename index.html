@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta charset="utf-8" />
@@ -7930,6 +7931,9 @@
         </style>
     </head>
     <body>
+        <script>
+            document.body.style.display = "none";
+        </script>
         <div id="overlay" class="overlay"><p>LOADING . . .</p></div>
         <div class="tabs">
             <div class="tab">
@@ -8301,6 +8305,7 @@
             document.addEventListener("DOMContentLoaded", function (event) {
                 var scrollpos = localStorage.getItem("scrollpos");
                 if (scrollpos) document.getElementById("contentbox").scrollTo(0, scrollpos);
+                document.body.style.display = "block";
             });
 
             window.onbeforeunload = function (e) {
