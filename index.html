@@ -8303,9 +8303,9 @@
 
         <script>
             document.addEventListener("DOMContentLoaded", function (event) {
+                document.body.style.display = "block";
                 var scrollpos = localStorage.getItem("scrollpos");
                 if (scrollpos) document.getElementById("contentbox").scrollTo(0, scrollpos);
-                document.body.style.display = "block";
             });
 
             window.onbeforeunload = function (e) {
