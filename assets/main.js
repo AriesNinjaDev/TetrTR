@@ -129,6 +129,7 @@ if (predata != null) {
                 console.log("This page cannot be loaded in an iframe.");
                 document.getElementById("loadertext").innerText =
                     "Failed to load the page.";
+            }
             setCookie("preload", JSON.stringify(json), 1);
             loadSite(json);
         });
