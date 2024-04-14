@@ -14,6 +14,14 @@ window.onbeforeunload = function (e) {
     );
 };
 
+function inIframe () {
+    try {
+        return window.self !== window.top;
+    } catch (e) {
+        return true;
+    }
+}
+
 function utstds(timestamp) {
     // Multiply by 1000 because JavaScript works in milliseconds
     const date = new Date(timestamp * 1000);
@@ -117,6 +125,10 @@ if (predata != null) {
                     "Failed to load the page.";
                 return;
             }
+            if (inIframe()) {
+                console.log("This page cannot be loaded in an iframe.");
+                document.getElementById("loadertext").innerText =
+                    "Failed to load the page.";
             setCookie("preload", JSON.stringify(json), 1);
             loadSite(json);
         });
