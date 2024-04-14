@@ -7918,6 +7918,11 @@
                 opacity: 0; /* Fading out */
                 pointer-events: none; /* Disable pointer events when fully transparent */
             }
+
+            .labelx {
+                width: 50%;
+                text-align: center;
+            }
         </style>
     </head>
     <body>
@@ -7941,7 +7946,7 @@
                                 >
                             </div>
                         </div>
-                        <p>FT 7</p>
+                        <p class="labelx">FT 7</p>
                         <div class="rank-row bevel-rank-x">
                             <div class="rank">
                                 <img
@@ -7980,7 +7985,7 @@
                                 ---
                             </div>
                         </div>
-                        <p>FT 5</p>
+                        <p class="labelx">FT 5</p>
                         <div class="rank-row bevel-rank-ss">
                             <div class="rank">
                                 <img
@@ -8057,7 +8062,7 @@
                                 ---
                             </div>
                         </div>
-                        <p>FT 3</p>
+                        <p class="labelx">FT 3</p>
                         <div class="rank-row bevel-rank-ap">
                             <div class="rank">
                                 <img
@@ -8333,68 +8338,63 @@
             }
 
             function loadSite(json) {
-              document.getElementById("xtotal").innerText =
-                        json.data.total;
+                document.getElementById("xtotal").innerText = json.data.total;
 
-                    document.getElementById("xtimestamp").innerText =
-                        utstds(json.data.cache / 1000) + " UTC";
+                document.getElementById("xtimestamp").innerText =
+                    utstds(json.data.cache / 1000) + " UTC";
 
-                    var cutoffs = json.data.cutoffs;
-                    var counts = json.data.counts;
+                var cutoffs = json.data.cutoffs;
+                var counts = json.data.counts;
 
-                    for (var i = 0; i < Object.keys(cutoffs).length; i++) {
-                        cutoffText = document.getElementById(
-                            "rank-" + Object.keys(cutoffs)[i]
-                        );
-                        cutoffText.innerHTML = Math.round(
-                            cutoffs[Object.keys(cutoffs)[i]]
-                        );
-                    }
+                for (var i = 0; i < Object.keys(cutoffs).length; i++) {
+                    cutoffText = document.getElementById(
+                        "rank-" + Object.keys(cutoffs)[i]
+                    );
+                    cutoffText.innerHTML = Math.round(
+                        cutoffs[Object.keys(cutoffs)[i]]
+                    );
+                }
 
-                    for (var i = 0; i < Object.keys(counts).length; i++) {
-                        countText = document.getElementById(
-                            "rcount-" + Object.keys(counts)[i]
-                        );
-                        countText.innerHTML =
-                            counts[Object.keys(counts)[i]] + " PLAYERS";
-                    }
+                for (var i = 0; i < Object.keys(counts).length; i++) {
+                    countText = document.getElementById(
+                        "rcount-" + Object.keys(counts)[i]
+                    );
+                    countText.innerHTML =
+                        counts[Object.keys(counts)[i]] + " PLAYERS";
+                }
 
-                    document.getElementById("un-per").innerText =
-                        Math.round(
-                            (counts["z"] / json.data.total) * 100000000
-                        ) / 1000000;
+                document.getElementById("un-per").innerText =
+                    Math.round((counts["z"] / json.data.total) * 100000000) /
+                    1000000;
 
-                    var overlay = document.getElementById("overlay");
-                    overlay.classList.add("active");
+                var overlay = document.getElementById("overlay");
+                overlay.classList.add("active");
 
-                    // Optionally, you can remove the overlay from the DOM after the animation finishes
-                    setTimeout(function () {
-                        overlay.style.display = "none";
-                    }, 500);
+                // Optionally, you can remove the overlay from the DOM after the animation finishes
+                setTimeout(function () {
+                    overlay.style.display = "none";
+                }, 500);
             }
-
 
             predata = getCookie("preload");
 
             if (predata != null) {
-              console.log("Loading from local cache...");
-              loadSite(JSON.parse(predata));
+                console.log("Loading from local cache...");
+                loadSite(JSON.parse(predata));
             } else {
-              overlay.style.display = "block";
-              console.log("Loading from API...");
-              fetch("https://klay.lol:8387/fetch", {
-                method: "GET",
-            })
-                .then(function (response) {
-                    return response.json();
+                overlay.style.display = "block";
+                console.log("Loading from API...");
+                fetch("https://klay.lol:8387/fetch", {
+                    method: "GET",
                 })
-                .then(function (json) {
-                    setCookie("preload", JSON.stringify(json), 1);
-                    loadSite(json);
-                });
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (json) {
+                        setCookie("preload", JSON.stringify(json), 1);
+                        loadSite(json);
+                    });
             }
-
-
         </script>
     </body>
 </html>
