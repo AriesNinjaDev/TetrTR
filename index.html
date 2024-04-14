@@ -7933,7 +7933,7 @@
         <div id="overlay" class="overlay"><p>LOADING . . .</p></div>
         <div class="tabs">
             <div class="tab">
-                <div class="content">
+                <div id="contentbox" class="content">
                     <div class="ranks">
                         <div class="rank-row bevel-default">
                             <div class="description">
@@ -8298,6 +8298,17 @@
         </div>
 
         <script>
+            document.addEventListener("DOMContentLoaded", function (event) {
+                var scrollpos = localStorage.getItem("scrollpos");
+                if (scrollpos) document.getElementById("contentbox").scrollTo(0, scrollpos);
+            });
+
+            window.onbeforeunload = function (e) {
+                localStorage.setItem("scrollpos", document.getElementById("contentbox").scrollTop);
+            };
+        </script>
+
+        <script>
             function utstds(timestamp) {
                 // Multiply by 1000 because JavaScript works in milliseconds
                 const date = new Date(timestamp * 1000);
@@ -8401,15 +8412,6 @@
             }
         </script>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function (event) {
-                var scrollpos = localStorage.getItem("scrollpos");
-                if (scrollpos) window.scrollTo(0, scrollpos);
-            });
-
-            window.onbeforeunload = function (e) {
-                localStorage.setItem("scrollpos", window.scrollY);
-            };
-        </script>
+        
     </body>
 </html>
