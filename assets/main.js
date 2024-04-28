@@ -69,7 +69,7 @@ function loadSite(json) {
     document.getElementById("xtotal").innerText = json.data.total;
 
     document.getElementById("xtimestamp").innerText =
-        utstds(json.data.cache / 1000) + " UTC";
+        utstds(json.data.cache / 1000) + " utc";
 
     var cutoffs = json.data.cutoffs;
     var counts = json.data.counts;
@@ -122,13 +122,13 @@ if (predata != null) {
             if (json.status == "error") {
                 console.log("API error: " + json.message);
                 document.getElementById("loadertext").innerText =
-                    "Failed to load the page.";
+                    "failed to load the page.";
                 return;
             }
             if (inIframe()) {
                 console.log("This page cannot be loaded in an iframe.");
                 document.getElementById("loadertext").innerText =
-                    "Failed to load the page.";
+                    "failed to load the page.";
                 return;
             }
             setCookie("preload", JSON.stringify(json), 1);
