@@ -25,12 +25,12 @@ function urlFriendlyPM(str) {
 
 function utstds(timestamp) {
     const date = new Date(timestamp * 1000);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-    const seconds = String(date.getSeconds()).padStart(2, "0");
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+    const day = String(date.getUTCDate()).padStart(2, "0");
+    const hours = String(date.getUTCHours()).padStart(2, "0");
+    const minutes = String(date.getUTCMinutes()).padStart(2, "0");
+    const seconds = String(date.getUTCSeconds()).padStart(2, "0");
 
     const dateString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 
@@ -83,17 +83,31 @@ function loadSite(json) {
     var counts = json.data.counts;
 
     for (var i = 0; i < Object.keys(cutoffs).length; i++) {
+        if (Object.keys(cutoffs)[i] === "z") {
+            continue;
+        }
         cutoffText = document.getElementById("rank-" + Object.keys(cutoffs)[i]);
         cutoffText.innerHTML = Math.round(cutoffs[Object.keys(cutoffs)[i]]);
+        cutoffText.title = cutoffs[Object.keys(cutoffs)[i]] + " TR";
     }
 
     for (var i = 0; i < Object.keys(counts).length; i++) {
+        if (Object.keys(cutoffs)[i] === "z") {
+            continue;
+        }
         countText = document.getElementById("rcount-" + Object.keys(counts)[i]);
         countText.innerHTML = counts[Object.keys(counts)[i]] + " PLAYERS";
     }
 
+    let unranked = json.general.usercount - json.general.anoncount - json.general.rankedcount;
+
+    document.getElementById("rcount-z").innerText = unranked + " PLAYERS";
+
     document.getElementById("un-per").innerText =
-        Math.round((counts["z"] / json.data.total) * 100000000) / 1000000;
+        Math.round((unranked / (json.general.usercount - json.general.anoncount)) * 10000) / 100;
+
+    document.getElementById("un-per").title =
+        unranked / (json.general.usercount - json.general.anoncount)*100 + "%";
 
     var overlay = document.getElementById("overlay");
     overlay.classList.add("active");
