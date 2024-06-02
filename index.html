@@ -16,7 +16,6 @@
         <title>TetrTR by Aries</title>
 
         <link rel="stylesheet" href="assets/main.css" />
-
     </head>
     <body>
         <div id="overlay" class="overlay">
@@ -32,7 +31,11 @@
                     <div class="ranks">
                         <div class="rank-row bevel-default">
                             <div class="description">
-                                <b>TETRTR<span class="versiontext">v1.4.0</span></b><br /><small>
+                                <b
+                                    >TETRTR<span class="versiontext"
+                                        >v1.5.0</span
+                                    ></b
+                                ><br /><small>
                                     a rank cutoff breakdown for Tetr.io by
                                     ariesninja<br />Thanks to tenchi for the
                                     styling</small
@@ -43,6 +46,27 @@
                                     >total players:
                                     <total id="xtotal">---</total></small
                                 >
+                            </div>
+                        </div>
+                        <div id="player-content" style="display:none;">
+                            <p class="labelx">YOU</p>
+                            <div class="rank-row bevel-default">
+                                <div class="rank">
+                                    <img id="player-rank-icon" />
+                                </div>
+                                <div class="players">
+                                    <b id="player-name">---</b><br /><small
+                                        id="player-perc"
+                                        >(top ---% of players)</small
+                                    >
+                                </div>
+                                <div
+                                    id="player-tr"
+                                    class="required-tr tr"
+                                    title="This is how much TR you have."
+                                >
+                                    ---
+                                </div>
                             </div>
                         </div>
                         <p class="labelx">FT 7</p>
@@ -357,6 +381,5 @@
         </div>
 
         <script src="assets/main.js"></script>
-
     </body>
 </html>
