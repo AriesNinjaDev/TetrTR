@@ -125,7 +125,7 @@ const userParam = url.searchParams.get("user");
 if (userParam) {
     overlay.style.display = "block";
     console.log("Loading from API for user "+userParam+"...");
-    fetch("https://klay.lol:8387/fetch/"+userParam, {
+    fetch("https://klay.aries.ninja:8387/fetch/"+userParam, {
         method: "GET",
     })
         .then(function (response) {
@@ -153,7 +153,7 @@ if (userParam) {
 } else {
     overlay.style.display = "block";
     console.log("Loading from API...");
-    fetch("https://klay.lol:8387/fetch", {
+    fetch("https://klay.aries.ninja:8387/fetch", {
         method: "GET",
     })
         .then(function (response) {
